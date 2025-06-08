@@ -49,15 +49,15 @@ def top_trading_cycles(endowment: Union[List[int], tuple[int]], preferences: Pre
 
     if not all(isinstance(x, int) for x in endowment):
         raise TypeError("Each element in endowment should be int.")
+    if not isinstance(preferences, Preference):
+        raise TypeError("preferences should be Preference type.")
     if len(endowment) != len(preferences.prefs):
         raise ValueError("The length of endowment should be same as the length of preference profile.")
     set_endo = set(endowment)
-    if set_endo != set(range(len(set_endo))):
-        raise ValueError("endowment only contains integers from 0 to n-1, where n is the number of agents.")
     if len(endowment) != len(set_endo):
         raise ValueError("One object cannot held by multi-agent.")
-    if not isinstance(preferences, Preference):
-        raise TypeError("preferences should be Preference type.")
+    if set_endo != set(range(len(set_endo))):
+        raise ValueError("endowment only contains integers from 0 to n-1, where n is the number of agents.")
     
     # find top choices for agents
     n = len(endowment)

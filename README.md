@@ -1,12 +1,12 @@
 # gamealloc
 
-_Version 0.1.0_
+_Version 0.1.1_
 
 A Python package for classical resource allocation in game theory.
 
 ## Features
 
-- Fast implementation of Sequential Priority, Top Trading Cycles (TTC), and Pareto efficiency detection
+- Fast implementation of Sequential Priority (SP), Top Trading Cycles (TTC), and Pareto efficiency detection
 - Flexible Preference and Allocation classes
 - Random instance generator for benchmarking and teaching
 - Support for agent manipulation analysis and strategy-proofness evaluation
@@ -22,12 +22,6 @@ pip install -r requirements.txt
 pip install -e .
 ```
 
-
-
-<!-- ### Minimum working example
-```markdown
-## Quick Start
-``` -->
 ## Quick Start
 ```python
 from gamealloc import Preference, Assignment, top_trading_cycles
@@ -73,6 +67,28 @@ Carol → C
 - `random_objects_preference_instance(size, seed=42)`
 - `random_objects_allocation_instance(size, seed=42)`
 - `manipulation(agent: Union[int, str], preferences: Preference, order: Optional[List[int]], endowment: Optional[List[int]])`
+
+## Tests
+To run the unit tests and see the coverage, make sure you have installed pytest and pytest-cov. 
+
+Run the following commands in your terminal:
+```bash
+pip install pytest pytest-cov
+cd gamealloc
+pytest --cov=gamealloc 
+coverage report -m
+```
+- All test scripts are located in the `tests/` directory.
+- By default, pytest will automatically find and run all files that start with `test_`.
+- If `pytest.ini` is present, it will be used automatically for configuration.
+
+To view a detailed coverage report in your browser, you can run:
+```bash
+pytest --cov=gamealloc --cov-report=html
+open htmlcov/index.html
+```
+- The HTML report provides line-by-line details of which code is covered by your tests.
+- Coverage is currently 99%. Because both SP and TTC are strategy-proof, it is impossible to construct test cases where an agent can obtain a strictly better allocation by misrepresenting their preferences.
 
 ## Advanced usage
 

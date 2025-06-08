@@ -2,7 +2,6 @@ __pycache__/
 *.pyc
 *.pyo
 *.pyd
-*.ini
 *.egg-info/
 dist/
 build/
@@ -13,3 +12,5 @@ tmp/
 .ipynb_checkpoints/
 .DS_Store
 .env
+htmlcov/
+.coverage

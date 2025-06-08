@@ -25,6 +25,12 @@ class Preference:
     objects : Optional[List[str]]
         Names or identifiers of the objects. If not provided, default names "object_0", "object_1", ... are used.
     
+    Methods
+    --------
+    validate() -> Preference
+        Checks and enforces the consistency and validity of the object.  
+        Returns a validated Preference if all checks pass.
+
     Examples
     --------
     >>> pref = Preference(
@@ -42,8 +48,13 @@ class Preference:
 
     >>> pref.objects
     ["A", "B", "C"]
+
+    Warnings
+    --------
+    It is strongly recommended not to modify the content of a Preference object after initialization.
+    If you must make changes, please call the `.validate()` method after any modification to ensure the object remains consistent and valid.
     """
-    # TODO: auto_complete - fit partial preference to make TTC more convenient
+    
     prefs: List[List[int]]      
     agents: Optional[List[str]] = None
     objects: Optional[List[str]] = None
@@ -79,6 +90,13 @@ class Preference:
             if len(set(self.objects)) != len(self.objects):
                 raise ValueError("Each object's name should be different")
         return self
+    
+    def validate(self):
+        """
+        Checks and enforces the consistency and validity of the object.  
+        Returns a validated Preference if all checks pass (in-place).
+        """
+        return self._valid_prefs()._valid_agents()._valid_objects()
 
     def __post_init__(self):
         # TODO: Support #(agents) != #(objects)
@@ -107,8 +125,6 @@ class Preference:
             self.objects += objects[len(self.objects):]
         for i, v in enumerate(self.prefs):
             set_v = set(v)
-            if len(set_v) != len(v):
-                raise ValueError(f"Each element in agent {i}'s preference profile should be different")
             if len(set_v) == 0 or set_v != set(range(m)):
                 missing = [x for x in range(m) if x not in v]
                 self.prefs[i] += missing

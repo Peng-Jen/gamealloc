@@ -154,7 +154,7 @@ def find_all_pareto_efficient_allocations(preference: Preference) -> List[Alloca
 
     n = len(preference.prefs)
     if n >= 7:
-        warnings.warn("The time complexity for this funcion is O(n!). Use it carefully with large number of agents (n >= 7).")
+        warnings.warn("The time complexity for this funcion is O(n!). Use it carefully with large number of agents (n >= 7).", UserWarning)
     permutation = itertools.permutations(range(n))
     res = []
     if n > 0: # Check there is at least an agent

@@ -16,6 +16,11 @@ def test_base_case():
     assert top_trading_cycles(test1, pref).to_dict() == {f"agent_{i}": f"object_{res1[i]}" for i in range(len(res1))}
     assert top_trading_cycles(test2, pref).to_dict() == {f"agent_{i}": f"object_{res2[i]}" for i in range(len(res2))}
 
+def test_preference_type_error():
+    with pytest.raises(TypeError) as e:
+        top_trading_cycles(list(range(3)), [])
+    assert "Preference type" in str(e.value)
+
 def test_empty():
     pref = Preference([])
     assert top_trading_cycles([], pref).to_list() == []
@@ -53,3 +58,8 @@ def test_endowment_value_error():
     with pytest.raises(ValueError):
         # len(endowment) should be 2 and contains only 0 and 1
         top_trading_cycles([1,0,0], pref)
+
+def test_endowment_duplicate():
+    with pytest.raises(ValueError) as e:
+        top_trading_cycles([1, 1], Preference([[0, 1], [1, 0]]))
+    assert "multi-agent" in str(e.value)

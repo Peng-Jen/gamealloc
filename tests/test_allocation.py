@@ -64,6 +64,11 @@ def test_agents_value_error():
         Allocation([0,1], ["A", "B", "C"])
     assert "length of allocation" in str(e.value)
 
+def test_agents_duplicate():
+    with pytest.raises(ValueError) as e:
+        Allocation([0, 1], ["A", "A"])
+    assert "agent's name" in str(e.value)
+
 def test_agents_warning():
     with pytest.warns(UserWarning, match="agent_i"):
         Allocation([0,1],["A"])
@@ -78,3 +83,15 @@ def test_objects_value_error():
     with pytest.raises(ValueError) as e:
         Allocation([0,1], None, ["a"])
     assert "number of agents" in str(e.value)
+
+def test_objects_duplicate():
+    with pytest.raises(ValueError) as e:
+        Allocation([0, 1], ["A", "B"], ["a", "a"])
+    assert "object's name" in str(e.value)
+
+def test_validate():
+    with pytest.raises(ValueError) as e:
+        alloc = Allocation([0, 1], ["A", "B"], ["a", "b"])
+        alloc.objects[1] = "a"
+        alloc.validate()
+    assert "object's name" in str(e.value)

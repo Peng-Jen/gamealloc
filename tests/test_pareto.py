@@ -42,3 +42,7 @@ def test_find_all_pareto_efficient_allocations_same_preference():
 
 def test_find_all_pareto_efficient_allocations_empty():
     assert find_all_pareto_efficient_allocations(Preference([])) == []
+
+def test_find_all_pareto_efficient_allocations_big_n():
+    with pytest.warns(UserWarning, match=r"O\(n\!\)"):
+        find_all_pareto_efficient_allocations(Preference([list(range(7)) for _ in range(7)]))
