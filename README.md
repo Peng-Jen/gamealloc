@@ -1,6 +1,6 @@
 # gamealloc
 
-_Version 0.1.1_
+_Version 0.1.2_
 
 A Python package for classical resource allocation in game theory.
 
@@ -56,6 +56,13 @@ Carol → C
 {'Alice': 'A', 'Bob': 'B', 'Carol': 'C'}
 ```
 
+Or, you can just simply run
+```bash
+python examples.py
+```
+to quickly try out the package.
+The provided `examples.py` demonstrates how to create preferences, run allocation algorithms, and view the results — making it easy to explore the basic functionality without additional setup.
+
 ## Main APIs
 
 - `Preference(prefs: List[List[int]], agents: Optional[List[str]], objects: Optional[List[str]])`
@@ -75,12 +82,11 @@ Run the following commands in your terminal:
 ```bash
 pip install pytest pytest-cov
 cd gamealloc
-pytest --cov=gamealloc 
+pytest --cov=src/gamealloc 
 coverage report -m
 ```
 - All test scripts are located in the `tests/` directory.
 - By default, pytest will automatically find and run all files that start with `test_`.
-- If `pytest.ini` is present, it will be used automatically for configuration.
 
 To view a detailed coverage report in your browser, you can run:
 ```bash

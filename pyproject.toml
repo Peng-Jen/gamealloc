@@ -1,0 +1,25 @@
+# pyproject.toml
+
+[build-system]
+requires = ["setuptools>=64", "wheel"]
+build-backend = "setuptools.build_meta"
+
+[project]
+name = "gamealloc"
+version = "0.1.2"
+description = "A game theory allocation library"
+authors = [{name = "Tim Peng-Jen Chen", email = "tim.pjchen@email.com"}]
+requires-python = ">=3.9"
+dependencies = [
+]
+
+[tool.pytest.ini_options]
+pythonpath = "src"
+testpaths = ["tests"]
+
+[tool.setuptools.packages.find]
+where = ["src"]
+
+[tool.coverage.run]
+source = ["src/gamealloc"]
+
